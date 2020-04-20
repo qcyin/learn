@@ -309,33 +309,33 @@ public class SpringApplication {
 		configureHeadlessProperty();
 		// 获取需要运行的 SpringApplicationRunListener
 		SpringApplicationRunListeners listeners = getRunListeners(args);
-		// 启动所有 SpringApplicationRunListener
+		// 启动 SpringApplicationRunListener
 		listeners.starting();
 		try {
 			// 解析 args
 			ApplicationArguments applicationArguments = new DefaultApplicationArguments(args);
-			// 准备环境信息
+			// 准备环境信息（这个过程会加载application配置文件）
 			ConfigurableEnvironment environment = prepareEnvironment(listeners, applicationArguments);
 			// 配置是否跳过 BeanInfo
 			configureIgnoreBeanInfo(environment);
 			// 打印 Banner
 			Banner printedBanner = printBanner(environment);
-			// 创建 ApplicationContext
+			// 创建 ApplicationContext 容器
 			context = createApplicationContext();
 			// 获取 SpringBootExceptionReporter 类型工厂实例
 			exceptionReporters = getSpringFactoriesInstances(SpringBootExceptionReporter.class,
 					new Class[] { ConfigurableApplicationContext.class }, context);
-			// 准备上下文
+			// 刷新 Context 前置操作
 			prepareContext(context, environment, listeners, applicationArguments, printedBanner);
-			//  刷新上下文
+			// 刷新 Context
 			refreshContext(context);
-			// 刷新上下文后的操作
+			// 刷新 Context 后置操作
 			afterRefresh(context, applicationArguments);
 			stopWatch.stop();
 			if (this.logStartupInfo) {
 				new StartupInfoLogger(this.mainApplicationClass).logStarted(getApplicationLog(), stopWatch);
 			}
-			// 激活相关 SpringApplicationRunListener
+			// 发布 Context 处理完毕后的事件
 			listeners.started(context);
 			// 调用 runner
 			callRunners(context, applicationArguments);
@@ -346,6 +346,7 @@ public class SpringApplication {
 		}
 
 		try {
+			// 发布 Context 启动完毕，并且 Runner 运行完毕的事件
 			listeners.running(context);
 		}
 		catch (Throwable ex) {
@@ -388,8 +389,11 @@ public class SpringApplication {
 	private void prepareContext(ConfigurableApplicationContext context, ConfigurableEnvironment environment,
 			SpringApplicationRunListeners listeners, ApplicationArguments applicationArguments, Banner printedBanner) {
 		context.setEnvironment(environment);
+		// context 后置处理
 		postProcessApplicationContext(context);
+		// 初始化 context
 		applyInitializers(context);
+		// 发布 ApplicationContext 准备事件
 		listeners.contextPrepared(context);
 		if (this.logStartupInfo) {
 			logStartupInfo(context.getParent() == null);
@@ -397,11 +401,13 @@ public class SpringApplication {
 		}
 		// Add boot specific singleton beans
 		ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();
+		// 注册启动参数资源
 		beanFactory.registerSingleton("springApplicationArguments", applicationArguments);
 		if (printedBanner != null) {
 			beanFactory.registerSingleton("springBootBanner", printedBanner);
 		}
 		if (beanFactory instanceof DefaultListableBeanFactory) {
+			// 设置 beanFactory 中是否允许重复 bean 覆盖
 			((DefaultListableBeanFactory) beanFactory)
 					.setAllowBeanDefinitionOverriding(this.allowBeanDefinitionOverriding);
 		}
@@ -409,9 +415,11 @@ public class SpringApplication {
 			context.addBeanFactoryPostProcessor(new LazyInitializationBeanFactoryPostProcessor());
 		}
 		// Load the sources
+		// 获取所有的资源
 		Set<Object> sources = getAllSources();
 		Assert.notEmpty(sources, "Sources must not be empty");
 		load(context, sources.toArray(new Object[0]));
+		// 发布 ApplicationContext 加载事件
 		listeners.contextLoaded(context);
 	}
 
@@ -719,6 +727,7 @@ public class SpringApplication {
 		if (this.environment != null) {
 			loader.setEnvironment(this.environment);
 		}
+		// 加载资源
 		loader.load();
 	}
 

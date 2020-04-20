@@ -363,9 +363,9 @@ public class SpringApplication {
 		// 为 environment 配置一些信息
 		configureEnvironment(environment, applicationArguments.getSourceArgs());
 		ConfigurationPropertySources.attach(environment);
-        // 触发监听器（主要是触发ConfigFileApplicationListener，这个监听器将会加载如 properties\profile 这样的配置文件）
+        // 触发监听器（主要是触发ConfigFileApplicationListener，这个监听器将会加载一些配置文件）
 		listeners.environmentPrepared(environment);
-		// 将获取到的 environment 中的 spring.main 配置绑定到 SpringApplication 的 source 中。
+		// 将获取到的 environment 中的 spring.main 配置绑定到 SpringApplication 的 source 中
 		bindToSpringApplication(environment);
 		if (!this.isCustomEnvironment) {
 			environment = new EnvironmentConverter(getClassLoader()).convertEnvironmentIfNecessary(environment,

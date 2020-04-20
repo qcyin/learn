@@ -314,7 +314,7 @@ public class SpringApplication {
 		try {
 			// 解析 args
 			ApplicationArguments applicationArguments = new DefaultApplicationArguments(args);
-			// 准备环境信息（这个过程会加载application配置文件）
+			// 创建 environment（这个过程会加载application配置文件）
 			ConfigurableEnvironment environment = prepareEnvironment(listeners, applicationArguments);
 			// 配置是否跳过 BeanInfo
 			configureIgnoreBeanInfo(environment);
@@ -337,7 +337,7 @@ public class SpringApplication {
 			}
 			// 发布 Context 处理完毕后的事件
 			listeners.started(context);
-			// 调用 runner
+			// 触发 runner
 			callRunners(context, applicationArguments);
 		}
 		catch (Throwable ex) {
@@ -360,10 +360,10 @@ public class SpringApplication {
 			ApplicationArguments applicationArguments) {
 		// Create and configure the environment
 		ConfigurableEnvironment environment = getOrCreateEnvironment();
-		// 从启动参数中配置一些环境信息
+		// 为 environment 配置一些信息
 		configureEnvironment(environment, applicationArguments.getSourceArgs());
 		ConfigurationPropertySources.attach(environment);
-		// 告诉 listeners 环境信息
+        // 触发监听器（主要是触发ConfigFileApplicationListener，这个监听器将会加载如 properties\profile 这样的配置文件）
 		listeners.environmentPrepared(environment);
 		// 将获取到的 environment 中的 spring.main 配置绑定到 SpringApplication 的 source 中。
 		bindToSpringApplication(environment);
@@ -511,7 +511,9 @@ public class SpringApplication {
 			ConversionService conversionService = ApplicationConversionService.getSharedInstance();
 			environment.setConversionService((ConfigurableConversionService) conversionService);
 		}
+		// 添加初始的 properties
 		configurePropertySources(environment, args);
+        // 添加初始的 profile
 		configureProfiles(environment, args);
 	}
 

@@ -303,7 +303,7 @@ public class SpringApplication {
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 		ConfigurableApplicationContext context = null;
-		// 异常追踪器
+		// exception 追踪器
 		Collection<SpringBootExceptionReporter> exceptionReporters = new ArrayList<>();
 		// 配置 Headless 模式
 		configureHeadlessProperty();
@@ -337,6 +337,7 @@ public class SpringApplication {
 			}
 			// 激活相关 SpringApplicationRunListener
 			listeners.started(context);
+			// 调用 runner
 			callRunners(context, applicationArguments);
 		}
 		catch (Throwable ex) {

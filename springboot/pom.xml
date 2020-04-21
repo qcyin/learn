@@ -32,10 +32,10 @@
                     <artifactId>spring-boot</artifactId>
                     <groupId>org.springframework.boot</groupId>
                 </exclusion>
-                <exclusion>
+                <!--<exclusion>
                     <artifactId>spring-boot-autoconfigure</artifactId>
                     <groupId>org.springframework.boot</groupId>
-                </exclusion>
+                </exclusion>-->
             </exclusions>
         </dependency>
         <dependency>

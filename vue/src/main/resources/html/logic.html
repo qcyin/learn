@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>logic</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app1">
+    <h1 v-if="awesome">Vue is awesome!</h1>
+    <h1 v-else>Oh no 😢</h1>
+</div>
+<div id="app2">
+    <span v-if="Math.random() > 0.5">Now you see me</span>
+    <span v-else>Now you don't</span>
+</div>
+<div id="app3">
+    <div v-if="type === 'A'">
+        A
+    </div>
+    <div v-else-if="type === 'B'">
+        B
+    </div>
+    <div v-else-if="type === 'C'">
+        C
+    </div>
+    <div v-else>
+        Not A/B/C
+    </div>
+</div>
+</body>
+<script>
+    var app1 = new Vue({
+        el: "#app1",
+        data: {
+            awesome: true
+        }
+    });
+    var app2 = new Vue({
+        el: "#app2",
+        data: {
+        }
+    });
+    var app3 = new Vue({
+        el: "#app3",
+        data: {
+            type: 'B'
+        }
+    });
+</script>
+</html>

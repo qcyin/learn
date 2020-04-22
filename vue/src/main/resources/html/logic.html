@@ -28,6 +28,26 @@
         Not A/B/C
     </div>
 </div>
+<div id="app4">
+    <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username">
+    </template>
+    <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address">
+    </template>
+</div>
+<div id="app5">
+    <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username" key="username-input">
+    </template>
+    <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address" key="email-input">
+    </template>
+</div>
 </body>
 <script>
     var app1 = new Vue({
@@ -45,6 +65,18 @@
         el: "#app3",
         data: {
             type: 'B'
+        }
+    });
+    var app4 = new Vue({
+        el: "#app4",
+        data: {
+            loginType: 'username'
+        }
+    });
+    var app5 = new Vue({
+        el: "#app5",
+        data: {
+            loginType: 'username'
         }
     });
 </script>

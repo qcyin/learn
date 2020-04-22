@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<ul id="example-1">
+    <li v-for="item in items" :key="item.message">
+        {{ item.message }}
+    </li>
+</ul>
+<ul id="example-2">
+    <li v-for="(item, index) in items">
+        {{ parentMessage }} - {{ index }} - {{ item.message }}
+    </li>
+</ul>
+<ul id="v-for-object" class="demo">
+    <li v-for="value in object">
+        {{ value }}
+    </li>
+</ul>
+<ul id="app1">
+    <li v-for="(value, name) in object">
+        {{ name }}: {{ value }}
+    </li>
+</ul>
+<ul id="app2">
+    <li v-for="(value, name, index) in object">
+        {{ index }}. {{ name }}: {{ value }}
+    </li>
+</ul>
+</body>
+<script>
+    var example1 = new Vue({
+        el: '#example-1',
+        data: {
+            items: [
+                { message: 'Foo' },
+                { message: 'Bar' }
+            ]
+        }
+    });
+    var example2 = new Vue({
+        el: '#example-2',
+        data: {
+            parentMessage: 'Parent',
+            items: [
+                { message: 'Foo' },
+                { message: 'Bar' }
+            ]
+        }
+    });
+    new Vue({
+        el: '#v-for-object',
+        data: {
+            object: {
+                title: 'How to do lists in Vue',
+                author: 'Jane Doe',
+                publishedAt: '2016-04-10'
+            }
+        }
+    });
+    new Vue({
+        el: '#app1',
+        data: {
+            object: {
+                title: 'How to do lists in Vue',
+                author: 'Jane Doe',
+                publishedAt: '2016-04-10'
+            }
+        }
+    });
+    new Vue({
+        el: '#app2',
+        data: {
+            object: {
+                title: 'How to do lists in Vue',
+                author: 'Jane Doe',
+                publishedAt: '2016-04-10'
+            }
+        }
+    });
+</script>
+</html>

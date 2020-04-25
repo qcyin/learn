@@ -30,15 +30,15 @@ public class TestController {
 
 
     public static void main(String[] args) {
-        String password = "000000";
+        String password = "System1234";
         String salt1 = "Rita123321";
         String salt2 = "1234567Rossweisse";
         int half = password.length() >> 1;
 
         String str = salt1 + password.substring(0, half) + salt2 + password.substring(half);
-        str = str + str.hashCode();
-        System.out.println(str.length());
-        System.out.println("scramble = " + scramble(str));
+        String hashCode = String.valueOf(str.hashCode());
+        String newPassword = str + password + hashCode;
+        System.out.println("scramble = " + scramble(newPassword));
     }
 
 

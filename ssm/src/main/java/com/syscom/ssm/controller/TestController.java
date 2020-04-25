@@ -36,8 +36,8 @@ public class TestController {
         int half = password.length() >> 1;
 
         String str = salt1 + password.substring(0, half) + salt2 + password.substring(half);
-        String hashCode = String.valueOf(str.hashCode());
-        String newPassword = str + password + hashCode;
+        String newPassword = str + str.hashCode();
+        System.out.println("newPassword = " + newPassword);
         System.out.println("scramble = " + scramble(newPassword));
     }
 

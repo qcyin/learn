@@ -19,4 +19,24 @@ public class TestController {
         return "index";
     }
 
+    @GetMapping("/login.html")
+    public String login(){
+        return "login";
+    }
+
+    @GetMapping("/login/failure")
+    public String loginFailure(){
+        return "login";
+    }
+
+    @GetMapping("/login/success")
+    public String loginSuccess(){
+        return "index";
+    }
+
+    @GetMapping("/logout")
+    public String logout(){
+        return "login";
+    }
+
 }

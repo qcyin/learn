@@ -41,12 +41,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-        .antMatchers("/", "/home").permitAll()
-        .anyRequest().authenticated()
-        .and()
-        .formLogin()
-        .loginPage("/login")
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/login", "/login.html").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login.html")
+                .usernameParameter("username")
+                .passwordParameter("password")
+//                .loginProcessingUrl("/login")
+                .successForwardUrl("/login/success")
+                .failureForwardUrl("/login/failure")
+                .and()
+                // https://www.cnblogs.com/felordcn/p/12142535.html
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+                .invalidateHttpSession(true) // 是否移除 HttpSession
+                .clearAuthentication(true) // 是否在退出时清除当前用户的认证信息
         ;
     }
 }

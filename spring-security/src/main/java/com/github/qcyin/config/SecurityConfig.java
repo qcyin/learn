@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
@@ -16,29 +17,36 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        PasswordEncoder passwordEncoder = new PasswordEncoder(){
-            @Override
-            public String encode(CharSequence charSequence) {
-                return charSequence.toString();
-            }
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-            @Override
-            public boolean matches(CharSequence charSequence, String s) {
-                return true;
-            }
-        };
-        auth.inMemoryAuthentication().passwordEncoder(passwordEncoder)
+        auth.inMemoryAuthentication()
+                .passwordEncoder(passwordEncoder)
                 .withUser("root")
-                .password("root").roles("USER");
+                .password(passwordEncoder.encode("root"))
+                .roles("root")
+                .and()
+                .passwordEncoder(passwordEncoder)
+                .withUser("admin")
+                .password(passwordEncoder.encode("123456"))
+                .roles("admin")
+        ;
+
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        super.configure(web);
+        String[] antPatterns = new String[]{"/css/**", "/font/**", "/img/**", "/js/**"};
+        web.ignoring().antMatchers(antPatterns);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+        http.authorizeRequests()
+        .antMatchers("/", "/home").permitAll()
+        .anyRequest().authenticated()
+        .and()
+        .formLogin()
+        .loginPage("/login")
+        ;
     }
 }

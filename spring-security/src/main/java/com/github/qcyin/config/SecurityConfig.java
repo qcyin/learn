@@ -43,23 +43,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
+                // resources permit
                 .antMatchers("/login", "/login.html").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login.html")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/index")
-                .failureUrl("/login")
+                .loginPage("/login.html")       // show login page
+                .usernameParameter("username")  // name="username"
+                .passwordParameter("password")  // name="password"
+                .loginProcessingUrl("/login")   // post url
+                .defaultSuccessUrl("/index")    // login success redirect url
+                .failureUrl("/login")           // login failure redirect url
                 .and()
                 // https://www.cnblogs.com/felordcn/p/12142535.html
                 .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login.html")
-                .invalidateHttpSession(true) // 是否移除 HttpSession
-                .clearAuthentication(true) // 是否在退出时清除当前用户的认证信息
+                .logoutUrl("/logout")                   // request url
+                .logoutSuccessUrl("/login.html")       // logout success redirect url
+                .invalidateHttpSession(true)            // invalidate httpSession
+                .clearAuthentication(true)              // clear Authenticated info
         ;
     }
 }

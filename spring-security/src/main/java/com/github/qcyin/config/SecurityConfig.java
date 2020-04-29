@@ -39,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(antPatterns);
     }
 
+    // https://www.jianshu.com/p/3bdea481e124
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
@@ -53,14 +54,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")  // name="password"
                 .loginProcessingUrl("/login")   // post url
                 .defaultSuccessUrl("/index")    // login success redirect url
-                .failureUrl("/login")           // login failure redirect url
+                .failureUrl("/login.html")           // login failure redirect url
                 .and()
                 // https://www.cnblogs.com/felordcn/p/12142535.html
                 .logout()
                 .logoutUrl("/logout")                   // request url
                 .logoutSuccessUrl("/login.html")       // logout success redirect url
-                .invalidateHttpSession(true)            // invalidate httpSession
+                .invalidateHttpSession(true)            // invalidate HttpSession
                 .clearAuthentication(true)              // clear Authenticated info
+                .deleteCookies("JSESSIONID")           // delete Cookies
         ;
     }
 }

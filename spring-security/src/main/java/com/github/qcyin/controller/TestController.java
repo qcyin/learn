@@ -1,9 +1,7 @@
 package com.github.qcyin.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class TestController {
@@ -20,9 +18,16 @@ public class TestController {
     }
 
     @GetMapping("/login.html")
-    public String login(){
+    public String loginPage(){
         return "login";
     }
+
+    @PostMapping("/login")
+    public String login(@RequestParam("username") String username,
+                        @RequestParam("password") String password){
+        return "index";
+    }
+
 
     @GetMapping("/login/failure")
     public String loginFailure(){

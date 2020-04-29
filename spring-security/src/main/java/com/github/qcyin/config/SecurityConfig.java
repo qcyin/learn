@@ -50,14 +50,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login.html")
                 .usernameParameter("username")
                 .passwordParameter("password")
-//                .loginProcessingUrl("/login")
-                .successForwardUrl("/login/success")
-                .failureForwardUrl("/login/failure")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/login/success")
+                .failureUrl("/login/failure")
                 .and()
                 // https://www.cnblogs.com/felordcn/p/12142535.html
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl("/login.html")
                 .invalidateHttpSession(true) // 是否移除 HttpSession
                 .clearAuthentication(true) // 是否在退出时清除当前用户的认证信息
         ;

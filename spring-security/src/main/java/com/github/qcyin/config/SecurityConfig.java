@@ -49,12 +49,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login.html")       // show login page
-                .usernameParameter("username")  // name="username"
-                .passwordParameter("password")  // name="password"
-                .loginProcessingUrl("/login")   // post url
-                .defaultSuccessUrl("/index")    // login success redirect url
-                .failureUrl("/login.html")           // login failure redirect url
+                .loginPage("/login.html")               // show login page
+                .usernameParameter("username")          // name="username"
+                .passwordParameter("password")          // name="password"
+                .loginProcessingUrl("/login")           // post url
+                .defaultSuccessUrl("/index")            // login success redirect url
+                .failureUrl("/login.html?error")      // login failure redirect url
                 .and()
                 // https://www.cnblogs.com/felordcn/p/12142535.html
                 .logout()

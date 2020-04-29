@@ -49,20 +49,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login.html")       // show login page
-                .usernameParameter("username")  // name="username"
-                .passwordParameter("password")  // name="password"
-                .loginProcessingUrl("/login")   // post url
-                .defaultSuccessUrl("/index")    // login success redirect url
-                .failureUrl("/login.html")           // login failure redirect url
+                // show login page
+                .loginPage("/login.html")
+                // name="username"
+                .usernameParameter("username")
+                // name="password"
+                .passwordParameter("password")
+                // post url
+                .loginProcessingUrl("/login")
+                // login success redirect url
+                .defaultSuccessUrl("/index")
+                // login failure redirect url
+                .failureUrl("/login.html")
                 .and()
                 // https://www.cnblogs.com/felordcn/p/12142535.html
                 .logout()
-                .logoutUrl("/logout")                   // request url
-                .logoutSuccessUrl("/login.html")       // logout success redirect url
-                .invalidateHttpSession(true)            // invalidate HttpSession
-                .clearAuthentication(true)              // clear Authenticated info
-                .deleteCookies("JSESSIONID")           // delete Cookies
+                // request url
+                .logoutUrl("/logout")
+                // logout success redirect url
+                .logoutSuccessUrl("/login.html")
+                // invalidate HttpSession
+                .invalidateHttpSession(true)
+                // clear Authenticated info
+                .clearAuthentication(true)
+                // delete Cookies
+                .deleteCookies("JSESSIONID")
         ;
     }
 }

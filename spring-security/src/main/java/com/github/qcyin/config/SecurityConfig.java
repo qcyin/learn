@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -35,8 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        String[] antPatterns = new String[]{"/css/**", "/font/**", "/img/**", "/js/**", "/static/png/**"};
-        web.ignoring().antMatchers(antPatterns);
+        web.ignoring().antMatchers("/static/**");
     }
 
     // https://www.jianshu.com/p/3bdea481e124
@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 // resources permit
-                .antMatchers("/**","/login", "/login.html").permitAll()
+                .antMatchers("/login", "/login.html").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

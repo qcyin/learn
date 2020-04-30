@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        String[] antPatterns = new String[]{"/css/**", "/font/**", "/img/**", "/js/**"};
+        String[] antPatterns = new String[]{"/css/**", "/font/**", "/img/**", "/js/**", "/static/png/**"};
         web.ignoring().antMatchers(antPatterns);
     }
 
@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 // resources permit
-                .antMatchers("/login", "/login.html").permitAll()
+                .antMatchers("/**","/login", "/login.html").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

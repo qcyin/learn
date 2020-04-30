@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/static/images/login2.png");
+        web.ignoring().antMatchers("/static/**");
     }
 
     // https://www.jianshu.com/p/3bdea481e124
@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 // resources permit
-                .antMatchers("/**","/login", "/login.html", "/static/images/login2.png").permitAll()
+                .antMatchers("/login", "/login.html").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

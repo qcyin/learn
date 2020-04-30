@@ -11,6 +11,8 @@
     <modules>
         <module>springboot</module>
         <module>vue</module>
+        <module>ssm</module>
+        <module>spring-security</module>
     </modules>
 
     <parent>

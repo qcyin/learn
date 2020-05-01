@@ -22,6 +22,11 @@ public class TestController {
         return "login";
     }
 
+    @GetMapping("/examples")
+    public String examples(){
+        return "examples";
+    }
+
 //    @PostMapping("/login")
 //    public String login(@RequestParam("username") String username,
 //                        @RequestParam("password") String password){

@@ -12,3 +12,7 @@ spring:
   thymeleaf:
     cache: false
     mode: LEGACYHTML5
+  mvc:
+    view:
+      suffix: .html
+

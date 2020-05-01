@@ -5,18 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title>
     <script src="../static/js/jquery.min.js" th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+    <script src="../static/assets/L2Dwidget.min.js" th:src="@{/static/assets/L2Dwidget.min.js}"></script>
+    <script src="../static/assets/live2d-init.js" th:src="@{/static/assets/live2d-init.js}"></script>
     <script src="../static/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
     <link rel="stylesheet" href="../static/css/signin.css" th:href="@{/static/css/signin.css}"/>
-
-    <style>
-        body {
-            background-image: url("static/png/39.png");
-        }
-    </style>
 </head>
 <body>
-
 <div class="container">
     <form class="form-signin" th:action="@{/login}" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
@@ -32,5 +27,8 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
 </div>
+<footer>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+</footer>
 </body>
 </html>

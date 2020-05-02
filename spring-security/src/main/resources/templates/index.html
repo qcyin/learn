@@ -82,8 +82,9 @@
                 </ul>
                 <form class="navbar-form navbar-left" role="search">
                     <div class="form-group">
-                        <input type="text" class="form-control" />
-                    </div> <button type="submit" class="btn btn-default">Submit</button>
+                        <input id="submit" type="text" class="form-control" />
+                    </div>
+                    <label for="submit"><button type="submit" class="btn btn-default">Submit</button></label>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
@@ -154,7 +155,7 @@
                             <a href="#"><i class="fa fa-fw fa-dropbox"></i> Page 5</a>
                         </li>
                         <li>
-                            <a href="./examples" th:href="@{./examples}"><i class="fa fa-fw fa-twitter"></i>examples</a>
+                            <a href="./examples.html" th:href="@{./examples}"><i class="fa fa-fw fa-twitter"></i>examples</a>
                         </li>
                     </ul>
                 </nav>

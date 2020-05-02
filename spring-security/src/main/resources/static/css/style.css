@@ -15,8 +15,8 @@ body{position:relative;overflow-x:hidden}
 .sidebar-nav li{display:inline-block;line-height:20px;position:relative;width:100%}
 /*
 .sidebar-nav li:before{background-color:#fff;content:'';height:100%;left:0;position:absolute;top:0;-webkit-transition:width .2s ease-in;transition:width .2s ease-in;width:3px;z-index:-1}
-*/
 .sidebar-nav li:first-child a{background-color:#fff;color:#000}
+*/
 /*
 .sidebar-nav li:nth-child(2):before{background-color:#402d5c}
 .sidebar-nav li:nth-child(3):before{background-color:#4c366d}

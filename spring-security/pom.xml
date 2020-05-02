@@ -52,7 +52,7 @@
         </dependency>
 
         <!-- https://v3.bootcss.com/getting-started/#examples-custom -->
-        <!-- https://www.runoob.com/bootstrap4/bootstrap4-tutorial.html-->
+        <!-- https://www.runoob.com/bootstrap/bootstrap-tutorial.html -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>

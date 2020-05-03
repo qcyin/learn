@@ -49,6 +49,7 @@ public final class CollectionUtils {
 
 
     public static void main(String[] args) {
+        // test
         List<String> strings = Arrays.asList("1", "2", "3");
         System.out.println(mkString(strings, ",", "[", "]"));
 

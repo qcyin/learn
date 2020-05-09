@@ -105,7 +105,7 @@ public final class CollectionUtils {
         System.out.println(strings.stream().collect(Collectors.groupingBy(s -> s, Collectors.counting())));
 
 
-        Map<String, AtomicLong> groupedMap = groupingBy(strings, s -> s, CollectorHelper.count());
+        Map<String, AtomicLong> groupedMap = groupingBy(strings, s -> s, CollectorHelper.counting());
 
         System.out.println(groupedMap);
 

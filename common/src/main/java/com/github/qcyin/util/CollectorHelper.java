@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 public final class CollectorHelper {
     private CollectorHelper(){}
 
-    public static<T> Tuple2<Supplier<AtomicLong>, BiConsumer<AtomicLong, T>> count(){
+    public static<T> Tuple2<Supplier<AtomicLong>, BiConsumer<AtomicLong, T>> counting(){
         return new Tuple2<>(AtomicLong::new, (i, t) -> i.incrementAndGet());
     }
 

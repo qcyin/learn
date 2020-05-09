@@ -35,11 +35,11 @@ public final class CollectionUtils {
 
 
     public static<T> String mkString(Collection<T> collection, CharSequence delimiter, CharSequence prefix, CharSequence suffix, BiConsumer<StringBuilder, T> consumer) {
-        Objects.requireNonNull(collection, "collection must not br null");
-        Objects.requireNonNull(delimiter, "delimiter must not br null");
-        Objects.requireNonNull(prefix, "prefix must not br null");
-        Objects.requireNonNull(suffix, "suffix must not br null");
-        Objects.requireNonNull(consumer, "consumer must not br null");
+        Objects.requireNonNull(collection, "collection must not be null");
+        Objects.requireNonNull(delimiter, "delimiter must not be null");
+        Objects.requireNonNull(prefix, "prefix must not be null");
+        Objects.requireNonNull(suffix, "suffix must not be null");
+        Objects.requireNonNull(consumer, "consumer must not be null");
 
         StringBuilder sbd = new StringBuilder(prefix);
         Iterator<T> iterator = collection.iterator();
@@ -61,11 +61,19 @@ public final class CollectionUtils {
     public static<T, K, R> Map<K, R> groupingBy(Collection<T> collection,
                                                    Function<T, K> classifier,
                                                    Tuple2<Supplier<R>, BiConsumer<R, T>> collector){
+        Objects.requireNonNull(collection, "collection must not be null");
+        Objects.requireNonNull(classifier, "classifier must not be null");
+        Objects.requireNonNull(collector, "collector must not be null");
+        Supplier<R> supplier = collector.getT1();
+        BiConsumer<R, T> accumulator = collector.getT2();
+        Objects.requireNonNull(classifier, "supplier must not be null");
+        Objects.requireNonNull(collector, "accumulator must not be null");
+
         Map<K, R> map = new HashMap<>(16);
         for (T t : collection) {
             K key = Objects.requireNonNull(classifier.apply(t), "element cannot be mapped to a null key");
-            R r = map.computeIfAbsent(key, k -> collector.getT1().get());
-            collector.getT2().accept(r, t);
+            R r = map.computeIfAbsent(key, k -> supplier.get());
+            accumulator.accept(r, t);
         }
         return map;
     }
@@ -74,7 +82,7 @@ public final class CollectionUtils {
 
     public static void main(String[] args) {
         // test
-        List<String> strings = Arrays.asList("key","key","key");
+        List<String> strings = Arrays.asList("key", "key", "key", "val", "val", "val", "val");
         System.out.println(mkString(strings, ",", "[", "]"));
 
         List<Map<String, Object>> mapList = new ArrayList<>();

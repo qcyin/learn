@@ -1,8 +1,14 @@
 package com.github.qcyin.util;
 
 
+import com.github.qcyin.tuple.Tuple2;
+
 import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiConsumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * @author yqc
@@ -47,10 +53,28 @@ public final class CollectionUtils {
         return sbd.append(suffix).toString();
     }
 
+    public static<T, K> Map<K, List<T>> groupingBy(Collection<T> collection, Function<T, K> classifier){
+        return groupingBy(collection, classifier, CollectorHelper.toList());
+    }
+
+
+    public static<T, K, R> Map<K, R> groupingBy(Collection<T> collection,
+                                                   Function<T, K> classifier,
+                                                   Tuple2<Supplier<R>, BiConsumer<R, T>> collector){
+        Map<K, R> map = new HashMap<>(16);
+        for (T t : collection) {
+            K key = Objects.requireNonNull(classifier.apply(t), "element cannot be mapped to a null key");
+            R r = map.computeIfAbsent(key, k -> collector.getT1().get());
+            collector.getT2().accept(r, t);
+        }
+        return map;
+    }
+
+
 
     public static void main(String[] args) {
         // test
-        List<String> strings = Arrays.asList("1", "2", "3");
+        List<String> strings = Arrays.asList("key","key","key");
         System.out.println(mkString(strings, ",", "[", "]"));
 
         List<Map<String, Object>> mapList = new ArrayList<>();
@@ -75,6 +99,18 @@ public final class CollectionUtils {
 
 
 
+
+
+
+        System.out.println(strings.stream().collect(Collectors.groupingBy(s -> s, Collectors.counting())));
+
+
+        Map<String, AtomicLong> groupedMap = groupingBy(strings, s -> s, CollectorHelper.count());
+
+        System.out.println(groupedMap);
+
     }
+
+
 
 }

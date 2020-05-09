@@ -8,6 +8,11 @@ spring:
     user:
      name: yqc
      password: 123456
+  # https://www.cnblogs.com/toutou/p/9802872.html
   thymeleaf:
     cache: false
     mode: LEGACYHTML5
+  mvc:
+    view:
+      suffix: .html
+

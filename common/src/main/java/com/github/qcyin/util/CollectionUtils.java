@@ -3,6 +3,7 @@ package com.github.qcyin.util;
 
 import java.util.*;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 
 /**
  * @author yqc
@@ -47,6 +48,59 @@ public final class CollectionUtils {
         return sbd.append(suffix).toString();
     }
 
+    /**
+     * c - v <br/>
+     * example: remove(list, hashSet, (e, s)->s.contains(e))
+     * @param c				被减数
+     * @param v				减数
+     * @param isAnyEqual	相等判别式
+     * @param <T>			被减数元素类型
+     * @param <V>			减数类型
+     * @return				差
+     */
+    public static <T, V> Collection<T> remove(Collection<T> c, V v, BiFunction<T, V, Boolean> isAnyEqual){
+        if (org.springframework.util.CollectionUtils.isEmpty(c) || Objects.isNull(v)){
+            return c;
+        }
+        List<T> list = new LinkedList<>();
+        for (T t1 : c) {
+            if (isAnyEqual.apply(t1, v)) {
+                continue;
+            }
+            list.add(t1);
+        }
+        return list;
+    }
+
+
+    /**
+     * c1 - c2
+     * @param c1			被减数
+     * @param c2			减数
+     * @param isEqual		相等判别式
+     * @param <T1>			被减数元素类型
+     * @param <T2>			减数元素类型
+     * @return				差
+     */
+    public static <T1, T2> List<T1> removeAll(List<T1> c1, List<T2> c2, BiFunction<T1, T2, Boolean> isEqual){
+        if (org.springframework.util.CollectionUtils.isEmpty(c1) || org.springframework.util.CollectionUtils.isEmpty(c2)){
+            return c1;
+        }
+        List<T1> list = new LinkedList<>();
+        for (T1 t1 : c1) {
+            boolean isAdd = true;
+            for (T2 t2 : c2) {
+                if (isEqual.apply(t1, t2)) {
+                    isAdd = false;
+                    break;
+                }
+            }
+            if (isAdd) {
+                list.add(t1);
+            }
+        }
+        return list;
+    }
 
     public static void main(String[] args) {
         // test

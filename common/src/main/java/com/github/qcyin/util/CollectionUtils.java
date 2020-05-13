@@ -9,6 +9,7 @@ import java.util.function.BiFunction;
  * @author yqc
  * @date 2020/5/322:28
  */
+@SuppressWarnings({"WeakerAccess", "SameParameterValue", "unused"})
 public final class CollectionUtils {
     private CollectionUtils(){}
 
@@ -102,7 +103,7 @@ public final class CollectionUtils {
         return list;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         // test
         List<String> strings = Arrays.asList("1", "2", "3");
         System.out.println(mkString(strings, ",", "[", "]"));
@@ -129,6 +130,6 @@ public final class CollectionUtils {
 
 
 
-    }
+    }*/
 
 }

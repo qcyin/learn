@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 
 /**
  * @author yqc
- * @date 2020/5/322:28
+ * @date 2020/5/3 22:28
  */
 @SuppressWarnings({"WeakerAccess", "SameParameterValue", "unused"})
 public final class CollectionUtils {

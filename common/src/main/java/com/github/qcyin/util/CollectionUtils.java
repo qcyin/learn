@@ -135,9 +135,6 @@ public final class CollectionUtils {
 
 
     /*public static void main(String[] args) {
-        // test
-        List<String> strings = Arrays.asList("key", "key", "key", "val", "val", "val", "val");
-        System.out.println(mkString(strings, ",", "[", "]"));
 
         List<Map<String, Object>> mapList = new ArrayList<>();
         Map<String, Object> map = new HashMap<>(16);
@@ -159,10 +156,14 @@ public final class CollectionUtils {
 
         System.out.println(mkString(mapList, ",", (sbd, kv) -> sbd.append(kv.get("k")).append(":").append(kv.get("v")) ));
 
+        System.out.println("==============================");
 
-        System.out.println(strings.stream().collect(Collectors.groupingBy(s -> s, Collectors.counting())));
+        List<String> strings = Arrays.asList("key", "key", "key", "val", "val", "val", "val");
+        System.out.println(mkString(strings, ",", "[", "]"));
 
-        Map<String, AtomicLong> groupedMap = groupingBy(strings, s -> s, CollectorHelper.counting());
+        System.out.println(strings.stream().collect(java.util.stream.Collectors.groupingBy(s -> s, java.util.stream.Collectors.counting())));
+
+        Map<String, java.util.concurrent.atomic.AtomicLong> groupedMap = groupingBy(strings, s -> s, CollectorHelper.counting());
 
         System.out.println(groupedMap);
 

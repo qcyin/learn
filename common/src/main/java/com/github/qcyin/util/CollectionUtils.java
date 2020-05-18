@@ -80,7 +80,7 @@ public final class CollectionUtils {
 
 
     /**
-     * c - v <br/>
+     * c - v ：c 减去与 v 相等的元素<br/>
      * example: remove(list, hashSet, (e, s)->s.contains(e))
      * @param c				被减数
      * @param v				减数
@@ -105,7 +105,7 @@ public final class CollectionUtils {
 
 
     /**
-     * c1 - c2
+     * c1 - c2：c 减去 c2 含有的元素
      * @param c1			被减数
      * @param c2			减数
      * @param isEqual		相等判别式

@@ -84,18 +84,18 @@ public final class CollectionUtils {
      * example: remove(list, hashSet, (e, s)->s.contains(e))
      * @param c				被减数
      * @param v				减数
-     * @param isAnyEqual	相等判别式
+     * @param isEqual	    相等判别式
      * @param <T>			被减数元素类型
      * @param <V>			减数类型
      * @return				差
      */
-    public static <T, V> Collection<T> remove(Collection<T> c, V v, BiFunction<T, V, Boolean> isAnyEqual){
+    public static <T, V> Collection<T> remove(Collection<T> c, V v, BiFunction<T, V, Boolean> isEqual){
         if (org.springframework.util.CollectionUtils.isEmpty(c) || Objects.isNull(v)){
             return c;
         }
         List<T> list = new LinkedList<>();
         for (T t1 : c) {
-            if (isAnyEqual.apply(t1, v)) {
+            if (isEqual.apply(t1, v)) {
                 continue;
             }
             list.add(t1);

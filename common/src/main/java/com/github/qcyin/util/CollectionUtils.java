@@ -74,11 +74,12 @@ public final class CollectionUtils {
         Objects.requireNonNull(collection, "collection must not be null");
         Objects.requireNonNull(classifier, "classifier must not be null");
         Objects.requireNonNull(collector, "collector must not be null");
-        Objects.requireNonNull(classifier, "supplier must not be null");
-        Objects.requireNonNull(collector, "accumulator must not be null");
-
         Supplier<R> supplier = collector.getT1();
         BiConsumer<R, T> accumulator = collector.getT2();
+        Objects.requireNonNull(supplier, "supplier must not be null");
+        Objects.requireNonNull(accumulator, "accumulator must not be null");
+
+
         Map<K, R> map = new HashMap<>(16);
         for (T t : collection) {
             K key = Objects.requireNonNull(classifier.apply(t), "element cannot be mapped to a null key");

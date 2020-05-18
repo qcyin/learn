@@ -66,7 +66,7 @@ public final class CollectionUtils {
      * @param <T>           集合 element 类型
      * @param <K>           分组 key 类型
      * @param <R>           分组 value 类型
-     * @return
+     * @return              分组结果
      */
     public static<T, K, R> Map<K, R> groupingBy(Collection<T> collection,
                                                    Function<T, K> classifier,

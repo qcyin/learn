@@ -62,7 +62,7 @@ public final class CollectionUtils {
      * 分组
      * @param collection    需要分组的集合
      * @param classifier    分组依据
-     * @param collector     收集器(提供收集 value 的容器, 将集合元素和 value 的结合方式)
+     * @param collector     收集器(提供收集 value 的容器, 集合元素和 value 的结合方式)
      * @param <T>           集合 element 类型
      * @param <K>           分组 key 类型
      * @param <R>           分组 value 类型

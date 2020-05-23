@@ -1,7 +1,5 @@
 package com.github.qcyin.util;
 
-import static org.springframework.util.StringUtils.*;
-
 
 /**
  * @author yqc

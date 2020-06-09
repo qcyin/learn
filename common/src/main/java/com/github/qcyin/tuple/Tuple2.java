@@ -7,14 +7,13 @@ import java.io.Serializable;
 
 /**
  * @author yqc
- * @date 2020/5/923:20
+ * @date 2020/5/9 23:20
  */
 @Data
 @AllArgsConstructor
 public class Tuple2<T1, T2> implements Serializable {
     private T1 t1;
     private T2 t2;
-
 
 
     @Override

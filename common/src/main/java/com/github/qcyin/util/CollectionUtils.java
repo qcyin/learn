@@ -129,8 +129,9 @@ public final class CollectionUtils {
             return c1;
         }
         List<T1> list = new LinkedList<>();
+        boolean isAdd;
         for (T1 t1 : c1) {
-            boolean isAdd = true;
+            isAdd = true;
             for (T2 t2 : c2) {
                 if (isEqual.apply(t1, t2)) {
                     isAdd = false;

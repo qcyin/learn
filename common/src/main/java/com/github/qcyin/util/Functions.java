@@ -398,10 +398,7 @@ public final class Functions {
             if (null == o) {
                 return null == u || null == l;
             }
-            if (null == u || null == l) {
-                return false;
-            }
-            return o.compareTo(l) >= 0 && o.compareTo(u) <= 0;
+            return !(null == u || null == l) && o.compareTo(l) >= 0 && o.compareTo(u) <= 0;
         } catch (NumberFormatException e) {
             return false;
         }

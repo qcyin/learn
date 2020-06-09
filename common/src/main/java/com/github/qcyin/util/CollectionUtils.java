@@ -101,7 +101,7 @@ public final class CollectionUtils {
      * @return				差
      */
     public static <T, V> Collection<T> remove(Collection<T> c, V v, BiFunction<T, V, Boolean> isEqual){
-        if (org.springframework.util.CollectionUtils.isEmpty(c) || Objects.isNull(v)){
+        if (c == null || c.isEmpty() || v == null){
             return c;
         }
         List<T> list = new LinkedList<>();
@@ -125,7 +125,7 @@ public final class CollectionUtils {
      * @return				差
      */
     public static <T1, T2> List<T1> removeAll(List<T1> c1, List<T2> c2, BiFunction<T1, T2, Boolean> isEqual){
-        if (org.springframework.util.CollectionUtils.isEmpty(c1) || org.springframework.util.CollectionUtils.isEmpty(c2)){
+        if (c1 == null || c1.isEmpty() || c2 == null || c2.isEmpty()){
             return c1;
         }
         List<T1> list = new LinkedList<>();

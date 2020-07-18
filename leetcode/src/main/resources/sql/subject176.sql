@@ -1,5 +1,0 @@
--- 第二大
-SELECT
-IFNULL( (SELECT DISTINCT Salary FROM Employee ORDER BY Salary DESC LIMIT 1 OFFSET 1),null)
- AS SecondHighestSalary
-FROM DUAL
